@@ -1,7 +1,7 @@
 # csc4210-cpu-scheduling-simulator.github.io
 
 Compilation:
-g++ main.cpp -o scheduler
+gcc src/main.c src/scheduler.c src/pcb.c -o scheduler
 
 Run:
 ./scheduler
