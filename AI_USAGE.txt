@@ -1,0 +1,2 @@
+AI tools were used only for syntax reminders and debugging assistance.
+No scheduling logic or trace computation was generated using AI.
