@@ -23,26 +23,6 @@ the complete PCB state for the RUNNING process and all READY processes
 at each time step.
 
 ----------------------------------------
-Directory Structure
-----------------------------------------
-Part_B/
-│
-├── src/
-│   ├── main.c
-│   ├── scheduler.c
-│   ├── scheduler.h
-│   ├── pcb.c
-│   └── pcb.h
-│
-├── input.txt
-├── output_fcfs.txt
-├── output_srtf.txt
-├── output_priority.txt
-├── output_rr.txt
-├── README.txt
-└── AI_USAGE.txt
-
-----------------------------------------
 Compilation Instructions
 ----------------------------------------
 From inside the Part_B directory:
