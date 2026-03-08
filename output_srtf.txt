@@ -1,0 +1,85 @@
+========================================
+        SRTF Scheduling
+========================================
+
+Time 0:
+RUNNING:
+  PID=P1 Arr=0 Burst=5 Rem=5 Prio=2 State=RUNNING
+READY:
+
+Time 1:
+RUNNING:
+  PID=P2 Arr=1 Burst=3 Rem=3 Prio=1 State=RUNNING
+READY:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=READY
+
+Time 2:
+RUNNING:
+  PID=P3 Arr=2 Burst=1 Rem=1 Prio=3 State=RUNNING
+READY:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=READY
+  PID=P2 Arr=1 Burst=3 Rem=2 Prio=1 State=READY
+
+Time 3:
+RUNNING:
+  PID=P2 Arr=1 Burst=3 Rem=2 Prio=1 State=RUNNING
+READY:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=READY
+  PID=P4 Arr=3 Burst=2 Rem=2 Prio=2 State=READY
+
+Time 4:
+RUNNING:
+  PID=P2 Arr=1 Burst=3 Rem=1 Prio=1 State=RUNNING
+READY:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=READY
+  PID=P4 Arr=3 Burst=2 Rem=2 Prio=2 State=READY
+
+Time 5:
+RUNNING:
+  PID=P4 Arr=3 Burst=2 Rem=2 Prio=2 State=RUNNING
+READY:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=READY
+
+Time 6:
+RUNNING:
+  PID=P4 Arr=3 Burst=2 Rem=1 Prio=2 State=RUNNING
+READY:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=READY
+
+Time 7:
+RUNNING:
+  PID=P1 Arr=0 Burst=5 Rem=4 Prio=2 State=RUNNING
+READY:
+
+Time 8:
+RUNNING:
+  PID=P1 Arr=0 Burst=5 Rem=3 Prio=2 State=RUNNING
+READY:
+
+Time 9:
+RUNNING:
+  PID=P1 Arr=0 Burst=5 Rem=2 Prio=2 State=RUNNING
+READY:
+
+Time 10:
+RUNNING:
+  PID=P1 Arr=0 Burst=5 Rem=1 Prio=2 State=RUNNING
+READY:
+
+
+=== Gantt Chart ===
++----+----+----+----+----+----+----+----+----+----+----+
+| P1 | P2 | P3 | P2 | P2 | P4 | P4 | P1 | P1 | P1 | P1 |
++----+----+----+----+----+----+----+----+----+----+----+
+0    1    2    3    4    5    6    7    8    9    10    11
+
+=== Scheduling Metrics ===
+PID    Arrival    Burst         Turnaround      Waiting        
+P1     0          5             11              6              
+P2     1          3             4               1              
+P3     2          1             1               0              
+P4     3          2             4               2              
+
+Average Turnaround Time : 5.00
+Average Waiting Time    : 2.25
+Average Response Time   : 0.50
