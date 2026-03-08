@@ -9,17 +9,14 @@ typedef enum {
 } State;
 
 typedef struct {
-    char pid[10];          // Process ID (like "P1")
-    int arrival_time;
-    int burst_time;
-    int remaining_time;
-    int priority;
-
+    char pid[10];
+    int  arrival;
+    int  burst;
+    int  remaining;
+    int  priority;
     State state;
-
-    int start_time;
-    int completion_time;
-} PCB;
+    int  startTime;       /* first time process hits CPU, -1 until then */
+    int  completionTime;  /* time when remaining hits 0                 */
+} Process;
 
 #endif
-

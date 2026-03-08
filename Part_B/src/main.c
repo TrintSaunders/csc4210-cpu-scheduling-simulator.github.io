@@ -1,36 +1,66 @@
 #include <stdio.h>
-#include <string.h>
 #include "scheduler.h"
 
-int main() {
+#define MAX_PROCESSES 100
 
-    FILE *file = fopen("input.txt", "r");
+int main(void) {
 
-    if (file == NULL) {
-        printf("Error opening input file.\n");
+    Process original[MAX_PROCESSES];
+    Process procs[MAX_PROCESSES];
+
+    /* ── Load input file ── */
+    int count = load_processes("input.txt", original, MAX_PROCESSES);
+    if (count == 0) {
+        printf("No processes loaded. Check input.txt\n");
         return 1;
     }
 
-    PCB processes[100];
-    int count = 0;
+    printf("Loaded %d processes from input.txt\n", count);
 
-    while (fscanf(file, "%s %d %d %d",
-        processes[count].pid,
-        &processes[count].arrival_time,
-        &processes[count].burst_time,
-        &processes[count].priority) == 4) {
+    /* ── Read quantum for Round Robin ── */
+    int quantum;
+    printf("Enter time quantum for Round Robin: ");
+    scanf("%d", &quantum);
 
-        processes[count].remaining_time = processes[count].burst_time;
-        processes[count].start_time = -1;
-        processes[count].completion_time = 0;
-        processes[count].state = NEW;
+    /* ──────────────────────────────────────────
+       FCFS
+       ────────────────────────────────────────── */
+    copy_processes(procs, original, count);
+    FILE *f = fopen("output_fcfs.txt", "w");
+    if (!f) { perror("output_fcfs.txt"); return 1; }
+    run_fcfs(procs, count, f);
+    fclose(f);
+    printf("FCFS  done  → output_fcfs.txt\n");
 
-        count++;
-    }
+    /* ──────────────────────────────────────────
+       SRTF
+       ────────────────────────────────────────── */
+    copy_processes(procs, original, count);
+    f = fopen("output_srtf.txt", "w");
+    if (!f) { perror("output_srtf.txt"); return 1; }
+    run_srtf(procs, count, f);
+    fclose(f);
+    printf("SRTF  done  → output_srtf.txt\n");
 
-    fclose(file);
+    /* ──────────────────────────────────────────
+       Priority (non-preemptive)
+       ────────────────────────────────────────── */
+    copy_processes(procs, original, count);
+    f = fopen("output_priority.txt", "w");
+    if (!f) { perror("output_priority.txt"); return 1; }
+    run_priority(procs, count, f);
+    fclose(f);
+    printf("Prio  done  → output_priority.txt\n");
 
-    run_fcfs(processes, count);
+    /* ──────────────────────────────────────────
+       Round Robin
+       ────────────────────────────────────────── */
+    copy_processes(procs, original, count);
+    f = fopen("output_rr.txt", "w");
+    if (!f) { perror("output_rr.txt"); return 1; }
+    run_round_robin(procs, count, quantum, f);
+    fclose(f);
+    printf("RR    done  → output_rr.txt\n");
 
     return 0;
 }
